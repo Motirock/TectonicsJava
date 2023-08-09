@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements Runnable {
     screenWidth = 1600, /* 16:9 Aspect Ratio */
     screenHeight = 900,
     FPS = 50, //Amount of graphical updates per second
-    updatesPerSecond = 1000, //Amount of logical updates per second
+    updatesPerSecond = 100, //Amount of logical updates per second
     volume = 50;
     public double GS = screenHeight/900.0; /* graphics scaling: all graphics are same relative size and position regardless of screen size */
 
