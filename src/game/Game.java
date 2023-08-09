@@ -13,10 +13,10 @@ public class Game {
     int mapMode = 1;
     long seed = 0;
 
-    int numPlates = 20;
-    int width = 160;
-    int height = 90;
-    int drawScale = 10;
+    int numPlates = 50;
+    int width = 800;
+    int height = 450;
+    int drawScale = 2;
 
     int minPlateCenterDistance = 1;
 
@@ -77,19 +77,19 @@ public class Game {
                     cellGrid[x][y].elevation = 0.5;
                 //If not matching above
                 if (y > 0 && cellGrid[x][y].plateID != cellGrid[x][y-1].plateID) {
-                    cellGrid[x][y].elevation += 0.5;
+                    cellGrid[x][y].elevation += getBoundaryElevationChange(cellGrid[x][y].plateID, cellGrid[x][y-1].plateID);
                 }
                 //If not matching below
-                if (y < height-1 && cellGrid[x][y].plateID != cellGrid[x][y+1].plateID) {
-                    cellGrid[x][y].elevation += 0.5;
+                else if (y < height-1 && cellGrid[x][y].plateID != cellGrid[x][y+1].plateID) {
+                    cellGrid[x][y].elevation += getBoundaryElevationChange(cellGrid[x][y].plateID, cellGrid[x][y+1].plateID);
                 }
                 //If not matching left
-                if (x > 0 && cellGrid[x][y].plateID != cellGrid[x-1][y].plateID) {
-                    cellGrid[x][y].elevation += 0.5;
+                else if (x > 0 && cellGrid[x][y].plateID != cellGrid[x-1][y].plateID) {
+                    cellGrid[x][y].elevation += getBoundaryElevationChange(cellGrid[x][y].plateID, cellGrid[x-1][y].plateID);
                 }
                 //If not matching right
-                if (x < width-1 && cellGrid[x][y].plateID != cellGrid[x+1][y].plateID) {
-                    cellGrid[x][y].elevation += 0.5;
+                else if (x < width-1 && cellGrid[x][y].plateID != cellGrid[x+1][y].plateID) {
+                    cellGrid[x][y].elevation += getBoundaryElevationChange(cellGrid[x][y].plateID, cellGrid[x+1][y].plateID);
                 }
             }
         }
@@ -164,6 +164,21 @@ public class Game {
                 }
             }
         }
+        if (mapMode == 3) {
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    if (cellGrid[x][y].elevation < -0.5)
+                        g2.setColor(new Color(8,83,159));
+                    else if (cellGrid[x][y].elevation < 0.0)
+                        g2.setColor(new Color(12,124,236));
+                    else if (cellGrid[x][y].elevation < 0.75)
+                        g2.setColor(new Color(116,212,92));
+                    else
+                        g2.setColor(new Color(124,124,128));
+                    g2.fillRect(x*drawScale, y*drawScale, drawScale, drawScale);
+                }
+            }
+        }
     }
 
     public int nearestPlate(int x, int y) {
@@ -181,5 +196,29 @@ public class Game {
 
     public Location getCell(int x, int y) {
         return cellGrid[x][y];
+    }
+
+    public double getBoundaryElevationChange(int firstPlateID, int secondPlateID) {
+        Plate firstPlate = plates[firstPlateID];
+        Plate secondPlate = plates[secondPlateID];
+        if (firstPlate.isOceanic && secondPlate.isOceanic)
+            return getBoundaryAngleDifference(firstPlate, secondPlate);
+        if (firstPlate.isOceanic && !secondPlate.isOceanic)
+            return getBoundaryAngleDifference(firstPlate, secondPlate)*2-1;
+        if (!firstPlate.isOceanic && secondPlate.isOceanic) {
+            return getBoundaryAngleDifference(firstPlate, secondPlate)*2-1;
+        }
+        if (!firstPlate.isOceanic && !secondPlate.isOceanic) {
+            return Math.abs(getBoundaryAngleDifference(firstPlate, secondPlate)*2-1);
+        }
+        return 0;
+    }
+
+    //Return 0 to 1 depending on how close the angle between them is to 0 degrees
+    public double getBoundaryAngleDifference(Plate firstPlate, Plate secondPlate) {
+        double angleDifference = Math.abs(Math.atan2(firstPlate.vy, firstPlate.vx) - Math.atan2(secondPlate.vy, secondPlate.vx));
+        if (angleDifference > Math.PI)
+            angleDifference = Math.PI*2 - angleDifference;
+        return angleDifference / Math.PI;
     }
 }
