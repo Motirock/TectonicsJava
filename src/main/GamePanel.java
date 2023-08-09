@@ -39,6 +39,16 @@ public class GamePanel extends JPanel implements Runnable {
     Action leftReleasedAction = keyH.new LeftReleasedAction();
     Action rightPressedAction = keyH.new RightPressedAction();
     Action rightReleasedAction = keyH.new RightReleasedAction();
+    //Number keys
+    Action equip1PressedAction = keyH.new Equip1PressedAction();
+    Action equip2PressedAction = keyH.new Equip2PressedAction();
+    Action equip3PressedAction = keyH.new Equip3PressedAction();
+    Action equip4PressedAction = keyH.new Equip4PressedAction();
+    Action equip5PressedAction = keyH.new Equip5PressedAction();
+    Action equip6PressedAction = keyH.new Equip6PressedAction();
+    Action equip7PressedAction = keyH.new Equip7PressedAction();
+    Action equip8PressedAction = keyH.new Equip8PressedAction();
+    Action equip9PressedAction = keyH.new Equip9PressedAction();
     //JComponent that the keybinds are added to
     JComponent thisWindow = Main.window.getRootPane();
     public void updateKeyBindings() {
@@ -59,6 +69,25 @@ public class GamePanel extends JPanel implements Runnable {
 		thisWindow.getActionMap().put("rightPressed", rightPressedAction);
         thisWindow.getInputMap().put(KeyStroke.getKeyStroke("released RIGHT"), "rightReleased");
 		thisWindow.getActionMap().put("rightReleased", rightReleasedAction);
+        //Number keys
+        thisWindow.getInputMap().put(KeyStroke.getKeyStroke("1"), "equip1Pressed");
+		thisWindow.getActionMap().put("equip1Pressed", equip1PressedAction);
+        thisWindow.getInputMap().put(KeyStroke.getKeyStroke("2"), "equip2Pressed");
+		thisWindow.getActionMap().put("equip2Pressed", equip2PressedAction);
+        thisWindow.getInputMap().put(KeyStroke.getKeyStroke("3"), "equip3Pressed");
+		thisWindow.getActionMap().put("equip3Pressed", equip3PressedAction);
+        thisWindow.getInputMap().put(KeyStroke.getKeyStroke("4"), "equip4Pressed");
+		thisWindow.getActionMap().put("equip4Pressed", equip4PressedAction);
+        thisWindow.getInputMap().put(KeyStroke.getKeyStroke("5"), "equip5Pressed");
+		thisWindow.getActionMap().put("equip5Pressed", equip5PressedAction);
+        thisWindow.getInputMap().put(KeyStroke.getKeyStroke("6"), "equip6Pressed");
+		thisWindow.getActionMap().put("equip6Pressed", equip6PressedAction);
+        thisWindow.getInputMap().put(KeyStroke.getKeyStroke("7"), "equip7Pressed");
+		thisWindow.getActionMap().put("equip7Pressed", equip7PressedAction);
+        thisWindow.getInputMap().put(KeyStroke.getKeyStroke("8"), "equip8Pressed");
+		thisWindow.getActionMap().put("equip8Pressed", equip8PressedAction);
+        thisWindow.getInputMap().put(KeyStroke.getKeyStroke("9"), "equip9Pressed");
+		thisWindow.getActionMap().put("equip9Pressed", equip9PressedAction);
     }
 
     //Mouse

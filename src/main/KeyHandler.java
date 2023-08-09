@@ -39,6 +39,7 @@ import javax.swing.AbstractAction;
 
 public class KeyHandler {
 	public boolean upArrowIsPressed, downArrowIsPressed, leftArrowIsPressed, rightArrowIsPressed;
+	public int numKeyPressed = 1;
 
 	//Arrow keys
 	public class UpPressedAction extends AbstractAction {
@@ -80,5 +81,61 @@ public class KeyHandler {
 		@Override public void actionPerformed(ActionEvent e) {
 			rightArrowIsPressed = false;
 		}
+	}
+
+	//Number keys
+	public class Equip1PressedAction extends AbstractAction {
+		@Override public void actionPerformed(ActionEvent e) {
+            numKeyPressed = 1;
+			System.out.println("1 PRESSED");
+		}		
+	}
+	public class Equip2PressedAction extends AbstractAction {
+		@Override public void actionPerformed(ActionEvent e) {
+            numKeyPressed = 2;
+			System.out.println("2 PRESSED");
+		}		
+	}
+	public class Equip3PressedAction extends AbstractAction {
+		@Override public void actionPerformed(ActionEvent e) {
+            numKeyPressed = 3;
+			System.out.println("3 PRESSED");
+		}		
+	}
+	public class Equip4PressedAction extends AbstractAction {
+		@Override public void actionPerformed(ActionEvent e) {
+            numKeyPressed = 4;
+			System.out.println("4 PRESSED");
+		}		
+	}
+	public class Equip5PressedAction extends AbstractAction {
+		@Override public void actionPerformed(ActionEvent e) {
+            numKeyPressed = 5;
+			System.out.println("5 PRESSED");
+		}		
+	}
+	public class Equip6PressedAction extends AbstractAction {
+		@Override public void actionPerformed(ActionEvent e) {
+            numKeyPressed = 6;
+			System.out.println("6 PRESSED");
+		}		
+	}
+	public class Equip7PressedAction extends AbstractAction {
+		@Override public void actionPerformed(ActionEvent e) {
+            numKeyPressed = 7;
+			System.out.println("7 PRESSED");
+		}		
+	}
+	public class Equip8PressedAction extends AbstractAction {
+		@Override public void actionPerformed(ActionEvent e) {
+            numKeyPressed = 8;
+			System.out.println("8 PRESSED");
+		}		
+	}
+	public class Equip9PressedAction extends AbstractAction {
+		@Override public void actionPerformed(ActionEvent e) {
+            numKeyPressed = 9;
+			System.out.println("9 PRESSED");
+		}		
 	}
 }	
